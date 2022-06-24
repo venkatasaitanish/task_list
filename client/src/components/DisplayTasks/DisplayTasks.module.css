@@ -2,6 +2,19 @@
     max-width: 700px;
     margin: 16px auto;
 }
+.heading{
+    font-family: sans-serif, Georgia, 'Times New Roman', Times, serif;
+}
 .addBtn{
     margin: 8px auto;
+}
+.col{
+    width: 60%;
+}
+.noTasks{
+    max-width: 60%;
+    margin: auto;
+}
+.tableCardContent{
+    padding-bottom: 8px !important;
 }
