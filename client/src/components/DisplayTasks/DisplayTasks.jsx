@@ -11,6 +11,7 @@ const DisplayTasks = () => {
 
     const [taskList, setTaskList] = useState([]);
     const [fetch, setFetch] = useState(false);
+    const [search, setSearch] = useState('');
 
     const deleteTask = async (id) => {
         try {
@@ -26,7 +27,7 @@ const DisplayTasks = () => {
         const getallTasks = async () => {
             try {
                 const res = await axios.get(`${base_url}`);
-                console.log(res.data);
+                //console.log(res.data);
                 setTaskList(res.data);
                 setFetch(true);
             } catch (err) {
@@ -68,6 +69,20 @@ const DisplayTasks = () => {
                     </Link>
                 </div>
                 <div>
+                    <form>
+                        <div className="form-group mb-2">
+                            <input
+                                type="text"
+                                placeholder="Search task"
+                                name="search"
+                                className="form-control"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </div>
+                    </form>
+                </div>
+                <div>
                     {fetch === false ? (Loading()) : taskList && taskList.length > 0 ? (
                         <Card>
                             <CardContent className={styles.tableCardContent}>
@@ -80,7 +95,7 @@ const DisplayTasks = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {taskList.map((curr) => (
+                                        {taskList.filter(curr => curr.item.toLowerCase().includes(search)).map((curr) => (
                                             <tr key={curr._id}>
                                                 <td className={styles.col}>{curr.item}</td>
                                                 <td className='text-center'>
