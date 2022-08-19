@@ -5,7 +5,7 @@ import { CircularProgress, Card, CardContent, Typography } from '@mui/material';
 import axios from 'axios';
 import styles from './DisplayTasks.module.css';
 // const local_url = 'http://localhost:5500/api/item';
-const base_url = 'https://task-list-tanish.herokuapp.com/api/item';
+const base_url = process.env.REACT_APP_BASE_URL;
 
 const DisplayTasks = () => {
 
