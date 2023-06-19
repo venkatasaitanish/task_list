@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {CircularProgress} from '@mui/material';
 import styles from './SubmitTask.module.css';
-// const local_url = 'http://localhost:5500/api/item';
-const base_url = 'https://task-list-tanish.herokuapp.com/api/item';
+const local_url = 'http://localhost:5500/api/item';
+//const base_url = process.env.REACT_APP_BASE_URL;
 
 const SubmitTask = () => {
 
@@ -18,7 +18,7 @@ const SubmitTask = () => {
         const newTask = {item};
         if(id) {
             try {
-                const res = await axios.put(`${base_url}/${id}`, newTask);
+                const res = await axios.put(`${local_url}/${id}`, newTask);
                 console.log(res.data);
                 navigate('/');
             } catch (err) {
@@ -27,7 +27,7 @@ const SubmitTask = () => {
         }
         else {
             try {
-                const res = await axios.post(`${base_url}`, newTask);
+                const res = await axios.post(`${local_url}`, newTask);
                 console.log(res.data);
                 navigate('/')
             } catch (err) {
@@ -39,7 +39,7 @@ const SubmitTask = () => {
     useEffect(() => {
         const getTask = async () => {
             try {
-                const res = await axios.get(`${base_url}/${id}`);
+                const res = await axios.get(`${local_url}/${id}`);
                 setItem(res.data.item);
                 setFetch(true);
             } catch (err) {

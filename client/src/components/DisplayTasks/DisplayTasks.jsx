@@ -4,8 +4,8 @@ import { Table } from 'react-bootstrap';
 import { CircularProgress, Card, CardContent, Typography } from '@mui/material';
 import axios from 'axios';
 import styles from './DisplayTasks.module.css';
-// const local_url = 'http://localhost:5500/api/item';
-const base_url = 'https://task-list-tanish.herokuapp.com/api/item';
+const local_url = 'http://localhost:5500/api/item';
+//const base_url = process.env.REACT_APP_BASE_URL;
 
 const DisplayTasks = () => {
 
@@ -15,7 +15,7 @@ const DisplayTasks = () => {
 
     const deleteTask = async (id) => {
         try {
-            const res = await axios.delete(`${base_url}/${id}`);
+            const res = await axios.delete(`${local_url}/${id}`);
             const newTaskList = taskList.filter(curr => curr._id !== id);
             setTaskList(newTaskList);
         } catch (err) {
@@ -26,7 +26,7 @@ const DisplayTasks = () => {
     useEffect(() => {
         const getallTasks = async () => {
             try {
-                const res = await axios.get(`${base_url}`);
+                const res = await axios.get(`${local_url}`);
                 //console.log(res.data);
                 setTaskList(res.data);
                 setFetch(true);
